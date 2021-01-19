@@ -19,6 +19,22 @@ public class emp_contoller {
 	 {
 	        return emprepo.save(emp);
 	 }
+
+
+	 @PutMapping("/employees/{id}")
+	    public ResponseEntity < emp > updateEmployee(@PathVariable(value = "id") Long employeeId,
+	        @Validated @RequestBody emp employeeDetails) throws ResourceNotFoundException {
+	        emp employee = emprepo.findById(employeeId)
+	            .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
+
+	        
+	        employee.setLname(employeeDetails.getLname());
+	        employee.setFname(employeeDetails.getFname());
+	        final emp updatedEmployee = emprepo.save(employee);
+	        return ResponseEntity.ok(updatedEmployee);
+	    }
+
+
 	
 	
 	
