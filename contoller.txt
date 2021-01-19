@@ -1,0 +1,24 @@
+@RestController
+@RequestMapping("/api/v1")
+public class emp_contoller {
+	
+	@Autowired
+	private emp_repos emprepo;
+	
+	
+	
+	@GetMapping("/emps")
+	public List<emp> getAllemp()
+	{
+		return emprepo.findAll();
+		
+	}
+	
+	 @PostMapping("/emps")
+	    public emp createemp(@Validated @RequestBody emp emp)
+	 {
+	        return emprepo.save(emp);
+	 }
+	
+	
+	
